@@ -9,9 +9,9 @@
                 <h3 class="list-group-item-heading">{{ $report->object }}</h3>
                 <span class="label label-default">{{ $report->date_time }}</span>
                 <p class="list-group-item-text">{{ $report->summary }}</p>
-                <h4>عدد النقاط المناقشة <span class="label label-success">{{ count($report->notes_count) }}</span> &emsp;&emsp;عدد
+                <h4>عدد النقاط المناقشة <span class="label label-success">{{ $report->notes_count }}</span> &emsp;&emsp;عدد
                     الحضور
-                    <span class="label label-warning">{{ count($report->presences_count) }}</span>
+                    <span class="label label-warning">{{ $report->presences_count }}</span>
                 </h4>
             </a>
         @endforeach

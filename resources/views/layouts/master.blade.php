@@ -41,10 +41,9 @@
 
     <script src="/js/app.js"></script>
 
-    <script src="/js/min/moment.min.js"></script>
+    <script src="/js/moment.min.js"></script>
     <script src="/js/fr.js"></script>
     <script src="/js/chart.min.js"></script>
-    <script src="/js/chart-data.js"></script>
 
     <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
     <script src="/js/bootstrap-toggle.min.js"></script>

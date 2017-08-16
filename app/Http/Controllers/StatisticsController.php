@@ -15,7 +15,32 @@ class StatisticsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+
+        $members_info = Member::select('name')
+            ->withCount('reports')
+            ->get();
+
+        $notes_info = Note::select('status')
+                ->get();
+
+        $nb_notes_done=$nb_notes_not=0;
+        foreach ($notes_info as $item){
+            if ($item['status']==1)
+                $nb_notes_done++;
+            else
+                $nb_notes_not++;
+        }
+
+        $data['labels'] = array();
+        $data['data'] = array();
+        foreach ($members_info as $m) {
+            array_unshift($data['labels'], $m['name']);
+            array_unshift($data['data'], $m['reports_count']);
+        }
+
+        return view('statistics',compact('nb_notes_done','nb_notes_not'))
+            ->with('labels', json_encode($data['labels']))
+            ->with('data', json_encode($data['data']));
     }
 
 
@@ -43,14 +68,14 @@ class StatisticsController extends Controller {
 
         foreach ($res as $m) {
             $dt = Carbon::parse($m['date_time']);
-            array_unshift($data['labels'],$dt->toFormattedDateString());
-            array_unshift($data['data'],$m['presences_count']);
+            array_unshift($data['labels'], $dt->toFormattedDateString());
+            array_unshift($data['data'], $m['presences_count']);
         }
 
 
         return view('dashboard', compact('nb_reports', 'nb_notes', 'nb_members'))
-            ->with('labels',json_encode($data['labels']))
-            ->with('data',json_encode($data['data']));
+            ->with('labels', json_encode($data['labels']))
+            ->with('data', json_encode($data['data']));
 
     }
 }
